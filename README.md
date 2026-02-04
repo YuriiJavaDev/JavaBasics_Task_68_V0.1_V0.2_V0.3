@@ -1,4 +1,4 @@
-# Chemical Experiment (JavaBasics_Task_68_V0.1/V0.2)
+# Chemical Experiment (JavaBasics_Task_68_V0.1_V0.2)
 
 ## 📖 Description
 This project simulates a laboratory experiment where a scientist mixes two precise components (0.1 and 0.2) to reach a target concentration of 0.3. It demonstrates the inherent precision issues of the `double` data type in Java when performing floating-point arithmetic and provides a professional solution.
