@@ -1,4 +1,4 @@
-# Chemical Experiment (JavaBasics_Task_68_V0.1_V0.2)
+# Chemical Experiment (JavaBasics_Task_68_V0.1_V0.2_V0.3)
 
 ## 📖 Description
 This project simulates a laboratory experiment where a scientist mixes two precise components (0.1 and 0.2) to reach a target concentration of 0.3. It demonstrates the inherent precision issues of the `double` data type in Java when performing floating-point arithmetic and provides a professional solution.
@@ -27,6 +27,13 @@ Task 68:
 * **Logic**: Uses `Math.abs(mixtureResult - expectedConcentration) < epsilon`.
 * **Result**: Comparison returns `true`.
 
+### 🔵 Phase 3: The Scaling Hack (V3)
+**Package:** `com.yurii.pavlenko.v3`
+* **Method**: Scaling components by 10.0 before addition.
+* **Logic**: `(0.1 * 10 + 0.2 * 10) / 10`.
+* **Result**: `true` (Comparison with `==` works).
+* **Warning**: Effective for simple cases, but risky for very large numbers or complex fractions.
+
 ## 🚀 Architectural Stack
 - **Precision Analysis**: Analyzing the IEEE 754 standard's impact on decimal representation.
 - **Logical Validation**: Demonstrating why `==` is unreliable for floating-point numbers.
@@ -42,6 +49,12 @@ Mixture Result: 0.30000000000000004
 Expected Concentration: 0.3
 Are they equal? false / true
 ```
+```text
+V0.3
+Mixture Result: 0.3
+Expected Concentration: 0.3
+Are they equal? true
+```
 
 ## 💻 Code Example
 
@@ -49,10 +62,11 @@ Project Structure:
 
     src/com/yurii/pavlenko/
                     ├── v1/
-                    │   └── ChemicalExperiment.java  # Initial implementation (Problem), Main Entry Point & Logic
-                    └── v2/
-                        └── ChemicalExperiment.java  # Fixed implementation (Solution), Main Entry Point & Logic
-
+                    │   └── ChemicalExperiment.java  # The Problem, Main Entry Point & Logic
+                    ├── v2/
+                    │   └── ChemicalExperiment.java  # Epsilon Solution, Main Entry Point & Logic
+                    └── v3/
+                        └── ChemicalExperiment.java  # Scaling Solution, Main Entry Point & Logic
 Code
 ```java
 package com.yurii.pavlenko.v1;
@@ -96,6 +110,31 @@ public class ChemicalExperiment {
         boolean comparisonResult = Math.abs(mixtureResult - expectedConcentration) < epsilon;
 
         System.out.println("V0.2");
+        System.out.println("Mixture Result: " + mixtureResult);
+        System.out.println("Expected Concentration: " + expectedConcentration);
+        System.out.println("Are they equal? " + comparisonResult);
+    }
+}
+```
+```java
+package com.yurii.pavlenko.v3;
+
+/**
+ * * JavaBasics_Task_68_V0.3
+ * ChemicalExperiment: Simulates mixing two chemical components.
+ * Investigates the "Scaling Hack" by multiplying components by 10.0
+ * to neutralize binary floating-point precision errors.
+ */
+public class ChemicalExperiment {
+    public static void main(String[] args) {
+
+        double ten = 10.0;
+        double mixtureResult = (0.1 * ten + 0.2 * ten) / ten;
+        double expectedConcentration = 0.3;
+
+        boolean comparisonResult = (mixtureResult == expectedConcentration);
+
+        System.out.println("V0.3");
         System.out.println("Mixture Result: " + mixtureResult);
         System.out.println("Expected Concentration: " + expectedConcentration);
         System.out.println("Are they equal? " + comparisonResult);
